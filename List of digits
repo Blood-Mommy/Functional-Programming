@@ -1,0 +1,40 @@
+-- Laboratory work 1
+-- Task 2
+-- Task: Define function that takes a list of digits as user input
+-- Provide a list based on user input with only even numbers in ascending order
+-- Calculate sum of all even numbers from the list
+
+-------------------------------------------------------------------------------------------
+asc_even_list :: Ord a => [a] -> [a] -- function sort numbers in ascending order by using recursion method
+asc_even_list [] = [] -- if empty list
+asc_even_list (x:xs) =  
+  asc_even_list [y| y <- xs, y<=x]   --sort elements smaller than x
+  ++ [x]  --pivot element in the middle is placed
+  ++ [y | y <- xs, y > x]   -- sort elements larger than x
+-------------------------------------------------------------------------------------------
+-- Main part
+main :: IO ()
+main = do
+-- Ask user for values imputs
+    putStrLn "Please, put the list of values in one line with spaces (for example, 1 2 3):"
+    digits <- getLine
+-- convert the string lines of values into Integers
+    let values = map read (words digits) :: [Int]
+-- Call sorting function and check if the number is even or not
+        evens  = asc_even_list (filter even values)
+-- Calculate the sum of all even numbers
+        total  = sum evens
+
+    putStrLn $ "Your provided list of digits before modification: \n" ++ show values
+    putStrLn $ "Your list which only contains even numbers in ascending order: \n" ++ show evens
+    putStrLn $ "Sum of all even numbers: " ++ show total
+    
+ -- if the user entered an empty list
+    if null values
+      then putStrLn "The list was empty."
+      else return ()
+      
+-- if there are no even numbers
+    if null evens
+      then putStrLn "There are no even numbers in your input."
+      else return ()
