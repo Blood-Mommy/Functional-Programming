@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------------------------------------------------------------
+-- Laboratory work 1 (Variant 2)
+-- Task: Write a Haskell program where you define and implement your own version of the map function
+-- Add exclamantion mark "!" to every element in a list
+---------------------------------------------------------------------------------------------------------------------------------
+
+-- define a list of strings
+list_data :: [String]
+list_data = ["Hola", "Hi", "Ciao", "Guten Morgen", "First things first", "Actions speak louder than words", "Where there’s a will, there’s a way", "20"] 
+
+--define a myMap function
+myMap :: (c -> d) -> [c] -> [d]
+myMap _ [] = [] -- allow to return the list if it is empty
+myMap m (x:xs) = m x : myMap m xs -- apply function m to head x by recursing on xs
+---------------------------------------------------------------------------------------------------------------------------------
+
+-- main part
+main :: IO ()
+main = do
+    -- print the original list
+    putStrLn $ "Your provided list before myMap function:\n" 
+             ++ unlines list_data
+    putStrLn "-------------------------------------------------------------"
+    
+    -- function for adding exclamation mark to every element
+    let list_exclamation = myMap (++ "!") list_data 
+    
+    -- print the result list after applying myMap
+    putStrLn $ "Your result list after myMap function:\n" 
+             ++ unlines list_exclamation
