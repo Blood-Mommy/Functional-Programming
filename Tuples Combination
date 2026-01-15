@@ -1,0 +1,40 @@
+---------------------------------------------------------------------------------------------------------------------------------
+-- Laboratory work 1 (Variant 2)
+-- Task 4
+-- Task: takes two tuples (in string type) from the user as input and create new tuple
+-- Tuple mapping
+    --Tuple 1 -> (a, b)
+    --Tuple 2 -> (c, d)
+    --Tuple 3 -> (a, d)
+---------------------------------------------------------------------------------------------------------------------------------
+-- function that takes a values from the first (a) and the second (d) tuple and give the combined tuple (a, d)
+output_tuple :: (String, String) -> (String, String) -> (String, String)
+output_tuple (a, b) (c, d) = (a, d)
+
+---------------------------------------------------------------------------------------------------
+main :: IO ()
+main = do
+    putStrLn "Please, write values for the first tuple:"
+    putStrLn "Please, enter first element (a): "
+    a <- getLine
+    putStrLn "Please, enter second element (b): "
+    b <- getLine
+    putStrLn "-------------------------------------------------------------"
+
+    putStrLn "Please, write values for the second tuple:"
+    putStrLn "Please, enter first element (c): "
+    c <- getLine
+    putStrLn "Please, enter second element (d): "
+    d <- getLine
+
+    -- Create the tuples based on user inputs
+    let tuple1 = (a, b)
+    let tuple2 = (c, d)
+
+    -- create third tuple that combine first and the second tuple
+    let tuple3 = output_tuple tuple1 tuple2
+
+    putStrLn "------------------------------------------------------------"
+    putStrLn $ "Tuple1: " ++ show tuple1
+    putStrLn $ "Tuple2: " ++ show tuple2
+    putStrLn $ "Tuple3 (a, d): " ++ show tuple3
