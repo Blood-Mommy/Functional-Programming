@@ -1,0 +1,42 @@
+-----------------------------------------------------------------------------------------------------------------------------
+-- Laboratory work 1 (Variant 2)
+-- Task 3
+-- Task: Take a sentence from the user and return a sentence containing only vowels.
+--       Add question mark at the end of the word if the number of letters is odd,
+--       and add a hashtag at the start if even.
+---------------------------------------------------------------------------------------------------------------------------------
+
+import Data.Char (toLower)  -- for case-insensitive vowel comparison
+
+---------------------------------------------------------------------------------------------------------------------------------
+-- Function that filters each word and returns only vowels (a, e, i, o, u)
+list_vowels :: String -> String
+list_vowels word = [toLower c | c <- word, toLower c `elem` "aeiou"]
+-- Each character in the word is defined as c
+--   - Convert it to lowercase using toLower for clear working of the function
+
+---------------------------------------------------------------------------------------------------------------------------------
+-- Function that adds either a question mark or a hashtag depending on word length
+result_word :: String -> String
+result_word a
+    | length a == 0 = ""         -- edge case: empty string
+    | odd (length a) = a ++ "?"  -- if number of vowels is odd → add "?" at end
+    | otherwise = "#" ++ a       -- if even → add "#" at start
+
+---------------------------------------------------------------------------------------------------------------------------------
+-- Function that applies both transformations to each word in the sentence
+modified_sentence :: String -> String
+modified_sentence sentence =
+    unwords [result_word (list_vowels a) | a <- words sentence]
+
+---------------------------------------------------------------------------------------------------------------------------------
+-- Main part
+-- Main function to read user input, process the sentence, and display the result
+main :: IO ()
+main = do
+    putStrLn "Please, write a sentence:"
+    sentence <- getLine                        -- get user input
+    let result = modified_sentence sentence    -- call the function
+    putStrLn "---------------------------------------------------------------"
+    putStrLn "Sentence containing only vowels and modified symbols:"
+    putStrLn result
